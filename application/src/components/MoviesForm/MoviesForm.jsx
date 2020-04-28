@@ -1,22 +1,32 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import SaveIcon from '@material-ui/icons/Save';
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "@material-ui/core/Button";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import SaveIcon from "@material-ui/icons/Save";
 
-import withHocs from './MoviesFormHoc';
+import withHocs from "./MoviesFormHoc";
 
 const directors = [
-  { id: 1, name: 'Quentin Tarantino', age: 55, movies: [ { name: 'Movie 1' }, { name: 'Movie 2' } ] },
-  { id: 2, name: 'Guy Ritchie', age: 50, movies: [ { name: 'Movie 1' }, { name: 'Movie 2' } ] }
+  {
+    id: 1,
+    name: "Quentin Tarantino",
+    age: 55,
+    movies: [{ name: "Movie 1" }, { name: "Movie 2" }],
+  },
+  {
+    id: 2,
+    name: "Guy Ritchie",
+    age: 50,
+    movies: [{ name: "Movie 1" }, { name: "Movie 2" }],
+  },
 ];
 
 class MoviesForm extends React.Component {
@@ -25,25 +35,41 @@ class MoviesForm extends React.Component {
   };
 
   handleSave = () => {
-    const { selectedValue, onClose } = this.props;
+    const { selectedValue, onClose, addMovie } = this.props;
     const { id, name, genre, rate, directorId, watched } = selectedValue;
+    addMovie({ id, name, genre, rate: Number(rate), directorId, watched: Boolean(watched) });
     onClose();
   };
 
   render() {
-    const { classes, open, handleChange, handleSelectChange, handleCheckboxChange, selectedValue = {} } = this.props;
+    const {
+      data = {},
+      classes,
+      open,
+      handleChange,
+      handleSelectChange,
+      handleCheckboxChange,
+      selectedValue = {},
+    } = this.props;
     const { name, genre, rate, directorId, watched } = selectedValue;
+    const { directors = [] } = data;
 
     return (
-      <Dialog onClose={this.handleClose} open={open} aria-labelledby="simple-dialog-title">
-        <DialogTitle className={classes.title} id="simple-dialog-title">Movie information</DialogTitle>
+      <Dialog
+        onClose={this.handleClose}
+        open={open}
+        aria-labelledby="simple-dialog-title"
+      >
+        <DialogTitle className={classes.title} id="simple-dialog-title">
+          Movie information
+        </DialogTitle>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             id="outlined-name"
             label="Name"
             className={classes.textField}
             value={name}
-            onChange={handleChange('name')}
+            onChange={handleChange("name")}
             margin="normal"
             variant="outlined"
           />
@@ -52,7 +78,7 @@ class MoviesForm extends React.Component {
             label="Genre"
             className={classes.textField}
             value={genre}
-            onChange={handleChange('genre')}
+            onChange={handleChange("genre")}
             margin="normal"
             variant="outlined"
           />
@@ -60,7 +86,7 @@ class MoviesForm extends React.Component {
             id="outlined-rate"
             label="Rate"
             value={rate}
-            onChange={handleChange('rate')}
+            onChange={handleChange("rate")}
             type="number"
             className={classes.textField}
             margin="normal"
@@ -68,7 +94,9 @@ class MoviesForm extends React.Component {
           />
           <FormControl variant="outlined" className={classes.formControlSelect}>
             <InputLabel
-              ref={ref => { this.InputLabelRef = ref; }}
+              ref={(ref) => {
+                this.InputLabelRef = ref;
+              }}
               htmlFor="outlined-age-simple"
             >
               Director
@@ -76,17 +104,38 @@ class MoviesForm extends React.Component {
             <Select
               value={directorId}
               onChange={handleSelectChange}
-              input={<OutlinedInput name="directorId" id="outlined-director" labelWidth={57} />}
+              input={
+                <OutlinedInput
+                  name="directorId"
+                  id="outlined-director"
+                  labelWidth={57}
+                />
+              }
             >
-            {directors.map(director => <MenuItem key={director.id} value={director.id}>{director.name}</MenuItem>)}
+              {directors.map((director) => (
+                <MenuItem key={director.id} value={director.id}>
+                  {director.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <div className={classes.wrapper}>
             <FormControlLabel
-              control={<Checkbox checked={watched} onChange={handleCheckboxChange('watched')} value="watched" />}
+              control={
+                <Checkbox
+                  checked={watched}
+                  onChange={handleCheckboxChange("watched")}
+                  value="watched"
+                />
+              }
               label="Watched movie"
             />
-            <Button onClick={this.handleSave} variant="contained" color="primary" className={classes.button}>
+            <Button
+              onClick={this.handleSave}
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
               <SaveIcon /> Save
             </Button>
           </div>
@@ -94,6 +143,6 @@ class MoviesForm extends React.Component {
       </Dialog>
     );
   }
-};
+}
 
-  export default withHocs(MoviesForm);
+export default withHocs(MoviesForm);
