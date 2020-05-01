@@ -1,8 +1,8 @@
 import { gql } from 'apollo-boost';
 
 export const moviesQuery = gql`
-  query moviesQuery {
-    movies {
+  query moviesQuery($name: String) {
+    movies(name: $name) {
       id
       name
       genre
@@ -10,6 +10,7 @@ export const moviesQuery = gql`
       rate
       director {
         name
+        id
       }
     }
   }

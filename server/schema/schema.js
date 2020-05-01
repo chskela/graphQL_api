@@ -169,14 +169,16 @@ const Query = new GraphQLObjectType({
     },
     movies: {
       type: GraphQLList(MovieType),
-      async resolve() {
-        return await Movies.find({});
+      args: { name: { type: GraphQLString } },
+      async resolve(parent, { name }) {
+        return await Movies.find({ name: { $regex: name, $options: "i" } });
       }
     },
     directors: {
       type: GraphQLList(DirectorType),
-      async resolve() {
-        return await Directors.find({});
+      args: { name: { type: GraphQLString } },
+      async resolve(parent, {name}) {
+        return await Directors.find({ name: { $regex: name, $options: "i" } });
       }
     },
   }
