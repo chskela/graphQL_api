@@ -6,7 +6,7 @@ const movieSchema = new Schema({
   genre: String,
   directorId: String,
   rate: Number,
-  watched: Boolean
+  watched: Boolean,
 });
 
 module.exports = mongoose.model('Movie', movieSchema);

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Tabs from './components/Tabs/Tabs';
-// import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from './components/theme';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from 'react-apollo';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3005/graphql'
+  uri: 'http://localhost:3005/graphql',
 });
 
 class App extends Component {
@@ -18,7 +17,6 @@ class App extends Component {
           <Tabs />
         </MuiThemeProvider>
       </ApolloProvider>
-
     );
   }
 }

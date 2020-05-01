@@ -8,8 +8,8 @@ import { styles } from './styles';
 
 const withGraphQL = graphql(moviesQuery, {
   options: ({ name = '' }) => ({
-    variables: {name},
+    variables: { name },
   }),
-})
+});
 
 export default compose(withStyles(styles), withGraphQL);

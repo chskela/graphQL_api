@@ -14,7 +14,7 @@ const withGraphQL = compose(
         variables: director,
         refetchQueries: [{
           query: directorsQuery,
-          variables: { name: '' }
+          variables: { name: '' },
         }],
       }),
     }),
@@ -25,7 +25,7 @@ const withGraphQL = compose(
         variables: director,
         refetchQueries: [{
           query: directorsQuery,
-          variables: { name: '' }
+          variables: { name: '' },
         }],
       }),
     }),

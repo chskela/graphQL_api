@@ -15,7 +15,7 @@ const withGraphQL = compose(
         variables: movie,
         refetchQueries: [{
           query: moviesQuery,
-          variables: {name: ''}
+          variables: { name: '' },
         }],
       }),
     }),
@@ -26,7 +26,7 @@ const withGraphQL = compose(
         variables: movie,
         refetchQueries: [{
           query: moviesQuery,
-          variables: { name: '' }
+          variables: { name: '' },
         }],
       }),
     }),

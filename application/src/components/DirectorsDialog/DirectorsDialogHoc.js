@@ -10,7 +10,7 @@ const withGraphqlDelete = graphql(deleteDirectorMutation, {
       variables: id,
       refetchQueries: [{
         query: directorsQuery,
-        variables: { name: '' }
+        variables: { name: '' },
       }],
     }),
   }),

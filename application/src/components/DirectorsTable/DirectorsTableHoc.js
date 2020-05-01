@@ -10,6 +10,6 @@ const withGraphQL = graphql(directorsQuery, {
   options: ({ name = '' }) => ({
     variables: { name },
   }),
-})
+});
 
 export default compose(withStyles(styles), withGraphQL);
