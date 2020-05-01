@@ -17,7 +17,7 @@
 ## Полезные ссылки:
 - [Graphql (Документация)](https://graphql.org/learn/)
 
-## Быстрый старт приложения (уроки с 10 по 16):
+## Быстрый старт приложения
 - Клонируйте репозиторий: `git clone https://github.com/chskela/graphQL_api.git`
 - Перейдите в папку **server** и установите зависимости: `npm install`
 - Перейдите в папку **application** и установите зависимости: `yarn install`
